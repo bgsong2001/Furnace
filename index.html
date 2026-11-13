@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>퍼니스 장입 계산기</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="장입계산">
+<meta name="theme-color" content="#F2F4F6">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<style>
+:root{
+  --bg:#F2F4F6; --card:#FFFFFF; --ink:#16202A; --sub:#5B6875; --line:#DDE2E7;
+  --acc:#0E6E6B; --acc-soft:#E3F1F0; --up:#B5462B; --up-soft:#FBEBE6;
+  --down:#2A5DA8; --down-soft:#E7EEF9; --hold:#6B7480; --hold-soft:#EEF0F2;
+  --warn:#9A5B00; --warn-soft:#FFF4DC; --err:#B3261E; --err-soft:#FCE8E6;
+  color-scheme: light;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif;
+  font-size:15px;line-height:1.4}
+body{padding:env(safe-area-inset-top) env(safe-area-inset-right) calc(env(safe-area-inset-bottom) + 24px) env(safe-area-inset-left)}
+.num{font-variant-numeric:tabular-nums}
+
+/* header + summary */
+.top{position:sticky;top:0;z-index:10;background:var(--bg);padding:10px 14px 8px;border-bottom:1px solid var(--line)}
+.title{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.title h1{font-size:18px;margin:0;font-weight:700;letter-spacing:-.2px}
+.save-state{font-size:11px;color:var(--sub)}
+.save-state.bad{color:var(--err)}
+.sum{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.sum div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:6px 8px}
+.sum small{display:block;font-size:11px;color:var(--sub)}
+.sum b{font-size:17px;font-weight:700}
+.sum .sub2{font-size:11px;color:var(--sub);margin-left:3px;font-weight:500}
+.sum .ok b{color:var(--acc)} .sum .ng b{color:var(--err)} .sum .wn b{color:var(--warn)}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:8px;background:#E3E7EB;border-radius:10px;padding:3px}
+.tabs button{border:0;background:transparent;font:inherit;font-weight:600;color:var(--sub);padding:8px 0;border-radius:8px}
+.tabs button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+
+main{padding:12px 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
+.card h2{font-size:14px;margin:0 0 10px;font-weight:700;color:var(--sub)}
+.banner{border-radius:10px;padding:9px 11px;margin-bottom:12px;font-size:13px;font-weight:600}
+.banner.err{background:var(--err-soft);color:var(--err)}
+.banner.warn{background:var(--warn-soft);color:var(--warn)}
+
+/* fields */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+label.f{display:block}
+label.f > span{display:block;font-size:12px;color:var(--sub);margin-bottom:4px}
+input[type=text],input[type=time]{width:100%;font:inherit;font-size:16px;padding:10px 10px;border:1px solid var(--line);
+  border-radius:10px;background:#FAFBFC;color:var(--ink);min-height:44px;-webkit-appearance:none;appearance:none}
+input:focus{outline:2px solid var(--acc);outline-offset:-1px;background:#fff}
+input.bad{border-color:var(--err);background:var(--err-soft)}
+.unit-in{position:relative}
+.unit-in input{padding-right:52px}
+.unit-in em{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-style:normal;font-size:12px;color:var(--sub);pointer-events:none}
+.seg{display:flex;background:#E9EDF0;border-radius:10px;padding:3px;gap:3px}
+.seg button{flex:1;border:0;background:transparent;font:inherit;font-weight:600;color:var(--sub);min-height:38px;border-radius:8px}
+.seg button.on{background:var(--acc);color:#fff}
+.hint{font-size:12px;color:var(--sub);margin-top:6px}
+.row{display:flex;gap:8px;align-items:center}
+
+/* step card */
+.step{border-left:4px solid var(--hold)}
+.step.k-up{border-left-color:var(--up)} .step.k-down{border-left-color:var(--down)}
+.step-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.step-no{font-weight:700;font-size:15px}
+.badge{font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--hold-soft);color:var(--hold)}
+.badge.k-up{background:var(--up-soft);color:var(--up)} .badge.k-down{background:var(--down-soft);color:var(--down)}
+.step-head .sp{flex:1}
+.ibtn{border:1px solid var(--line);background:#fff;border-radius:9px;width:36px;height:34px;font-size:15px;color:var(--sub);display:inline-flex;align-items:center;justify-content:center;padding:0}
+.ibtn:disabled{opacity:.3}
+.ibtn.del{color:var(--err)}
+.res{margin-top:10px;background:#F6F8F9;border-radius:10px;padding:8px 10px;display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;font-size:13px}
+.res .k{color:var(--sub)}
+.res .full{grid-column:1/-1}
+.res b{font-weight:700}
+.wmsg{margin-top:8px;font-size:12.5px;font-weight:600;color:var(--warn);background:var(--warn-soft);border-radius:8px;padding:6px 9px}
+.wmsg.err{color:var(--err);background:var(--err-soft)}
+.add{width:100%;border:1.5px dashed #AFC6C5;background:var(--acc-soft);color:var(--acc);font:inherit;font-weight:700;min-height:48px;border-radius:14px;margin-bottom:12px}
+.btn{border:1px solid var(--line);background:#fff;font:inherit;font-weight:600;min-height:42px;border-radius:10px;padding:0 14px;color:var(--ink)}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn.sm{min-height:34px;font-size:13px;padding:0 10px}
+
+/* chart */
+#chart{width:100%;height:auto;display:block}
+
+/* program table */
+.opts{display:flex;flex-direction:column;gap:10px}
+.toggle{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px}
+.sw{position:relative;width:48px;height:28px;flex:none}
+.sw input{opacity:0;width:0;height:0;position:absolute}
+.sw i{position:absolute;inset:0;background:#CBD2D9;border-radius:999px;transition:.15s}
+.sw i::after{content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.15s;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.sw input:checked + i{background:var(--acc)}
+.sw input:checked + i::after{left:23px}
+.pt{width:100%;border-collapse:collapse}
+.pt th{font-size:11.5px;color:var(--sub);font-weight:600;text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}
+.pt td{padding:10px 6px;border-bottom:1px solid #EEF1F3;vertical-align:middle}
+.pt tr.done td{opacity:.38}
+.pt tr.zero td.t{color:var(--sub)}
+.pt .segno{font-weight:700;font-size:15px;width:34px}
+.pt .sv{font-weight:700;font-size:19px;white-space:nowrap}
+.pt .t{font-weight:700;font-size:19px;white-space:nowrap;text-align:right}
+.pt .t small{display:block;font-size:11px;font-weight:500;color:var(--sub)}
+.pt .desc{font-size:12px;color:var(--sub);line-height:1.3}
+.pt .desc .note{color:var(--warn);font-weight:600}
+.pt .ck{width:40px;text-align:center}
+.ckb{width:30px;height:30px;border-radius:8px;border:2px solid #B8C1CA;background:#fff;display:inline-flex;align-items:center;justify-content:center;padding:0;color:#fff;font-size:16px}
+.ckb.on{background:var(--acc);border-color:var(--acc)}
+.modeline{font-size:12.5px;color:var(--sub);margin-bottom:6px}
+
+details.help summary{font-weight:700;font-size:14px;color:var(--sub);cursor:pointer;list-style:none}
+details.help summary::-webkit-details-marker{display:none}
+details.help summary::after{content:" ▾"}
+details.help ul{margin:8px 0 0;padding-left:18px;font-size:13px;color:#35424E}
+details.help li{margin-bottom:5px}
+
+.preset{display:flex;align-items:center;gap:6px;padding:8px 0;border-top:1px solid #EEF1F3}
+.preset:first-child{border-top:0}
+.preset .nm{flex:1;font-weight:600;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.preset .nm small{display:block;font-weight:400;color:var(--sub);font-size:11.5px}
+.empty{font-size:13px;color:var(--sub)}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 24px);transform:translateX(-50%) translateY(20px);
+  background:#16202A;color:#fff;padding:10px 16px;border-radius:999px;font-size:13px;opacity:0;transition:.2s;pointer-events:none;z-index:50}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="title">
+    <h1>퍼니스 장입 계산기</h1>
+    <span class="save-state" id="saveState"></span>
+  </div>
+  <div class="sum">
+    <div><small>총 소요</small><b class="num" id="sTotal">–</b><span class="sub2 num" id="sTotalMin"></span></div>
+    <div><small>종료 예상</small><b class="num" id="sEnd">–</b><span class="sub2" id="sEndDay"></span></div>
+    <div id="sSegBox"><small>세그먼트</small><b class="num" id="sSeg">–</b><span class="sub2" id="sSegMsg"></span></div>
+  </div>
+  <div class="tabs">
+    <button id="tabIn" class="on" type="button">① 프로파일 입력</button>
+    <button id="tabOut" type="button">② 컨트롤러 장입표</button>
+  </div>
+</div>
+
+<main>
+  <div id="banner"></div>
+
+  <!-- ① 입력 -->
+  <section id="pIn">
+    <div class="card">
+      <h2>기본 설정</h2>
+      <div class="grid2">
+        <label class="f"><span>시작 온도</span>
+          <div class="unit-in"><input type="text" inputmode="decimal" id="cStart"><em>°C</em></div></label>
+        <label class="f"><span>시작 시각 (선택)</span>
+          <input type="time" id="cTime"></label>
+      </div>
+      <div class="hint">시작 온도 = 프로그램 시작 시점의 노 내 온도 (SSV가 있는 컨트롤러면 SSV 값)</div>
+
+      <div style="height:12px"></div>
+      <label class="f"><span>시간 반올림 단위</span></label>
+      <div class="row">
+        <div class="seg" style="flex:1" id="unitSeg">
+          <button type="button" data-u="1">1 min</button>
+          <button type="button" data-u="0.1">0.1 min</button>
+        </div>
+        <div class="unit-in" style="width:110px"><input type="text" inputmode="decimal" id="cUnit"><em>min</em></div>
+      </div>
+      <div class="hint">컨트롤러가 받는 최소 시간 단위</div>
+
+      <div style="height:12px"></div>
+      <label class="f"><span>컨트롤러 방식</span></label>
+      <div class="seg" id="modeSeg">
+        <button type="button" data-m="A">A 방식</button>
+        <button type="button" data-m="B">B 방식</button>
+      </div>
+      <div class="hint" id="modeHint"></div>
+
+      <div style="height:12px"></div>
+      <label class="f"><span>최대 세그먼트 수 (비우면 검사 안 함)</span>
+        <input type="text" inputmode="numeric" id="cMax" placeholder="컨트롤러 사양"></label>
+    </div>
+
+    <div class="card">
+      <h2>온도 프로파일</h2>
+      <svg id="chart" viewBox="0 0 340 170" aria-label="온도 프로파일"></svg>
+    </div>
+
+    <div id="steps"></div>
+    <button class="add" id="addStep" type="button">+ 단계 추가</button>
+
+    <div class="card">
+      <h2>저장된 프로그램</h2>
+      <div class="row" style="margin-bottom:8px">
+        <input type="text" id="pName" placeholder="이름 (예: CS 1400 탄화)" style="flex:1">
+        <button class="btn pri" id="pSave" type="button">저장</button>
+      </div>
+      <div id="pList"></div>
+    </div>
+
+    <div class="card">
+      <details class="help">
+        <summary>사용법 · 주의</summary>
+        <ul>
+          <li>한 단계 = 목표 온도까지 승/하온 → 그 온도에서 유지. 유지가 없으면 0</li>
+          <li>장입 시간 = |목표 − 출발| ÷ 속도 → 반올림 단위로 반올림</li>
+          <li>반올림 때문에 실제 속도가 설정과 5% 이상 다르면 경고 표시</li>
+          <li>한 단계는 세그먼트 2개(승/하온 + 유지)로 펼쳐짐. 0분 세그먼트는 생략 가능</li>
+          <li>A: 'SV n, 시간 n' = 현재 온도에서 SV n까지 시간 n 동안 이동 (SSV 시작 온도 설정 방식)</li>
+          <li>B: 'SV n, 시간 n' = SV n에서 SV n+1까지 시간 n 동안 이동 (첫 SV가 시작 온도)</li>
+          <li>방식은 컨트롤러 매뉴얼 또는 기존 장입 기록과 대조해 확인</li>
+          <li>냉각 구간: 설정 속도는 상한일 뿐, 저온 영역은 자연 냉각이 더 느려 실제 종료가 늦어질 수 있음</li>
+          <li>세그먼트당 최대 입력 시간 제한, 종료 처리(END/HOLD)는 검사하지 않음</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <!-- ② 장입표 -->
+  <section id="pOut" class="hidden">
+    <div class="card">
+      <div class="opts">
+        <label class="toggle"><span>0분 세그먼트 제외 (번호 다시 매김)</span>
+          <span class="sw"><input type="checkbox" id="oHide"><i></i></span></label>
+        <label class="toggle"><span>시간을 h:mm로 크게 표시</span>
+          <span class="sw"><input type="checkbox" id="oHM"><i></i></span></label>
+      </div>
+    </div>
+    <div class="card" style="padding:8px 8px 4px">
+      <div class="modeline" id="modeLine"></div>
+      <table class="pt">
+        <thead><tr><th>Seg</th><th>SV (°C)</th><th style="text-align:right">시간</th><th></th></tr></thead>
+        <tbody id="ptBody"></tbody>
+      </table>
+    </div>
+    <div class="row" style="gap:8px">
+      <button class="btn" id="ckReset" type="button" style="flex:1">체크 초기화</button>
+      <button class="btn pri" id="copyTbl" type="button" style="flex:1">표 복사</button>
+    </div>
+    <div class="hint" style="margin-top:8px">행을 탭하면 입력 완료로 체크됩니다. 표 복사는 탭 구분 텍스트(엑셀 붙여넣기용)입니다.</div>
+  </section>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+var KEY="furnaceCalc.v1", PKEY="furnaceCalc.presets.v1", MAXSTEP=20;
+var DEF={start:"0",unit:"1",mode:"A",maxSeg:"",startTime:"09:30",
+  steps:[{t:"1000",r:"5",h:"0"},{t:"1400",r:"2.5",h:"120"},{t:"1000",r:"2.5",h:"0"},{t:"100",r:"5",h:"0"}],
+  hideZero:false,showHM:false};
+
+/* ---------- storage ---------- */
+var canStore=true;
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){canStore=false;return null}}
+function lsSet(k,v){try{localStorage.setItem(k,v);return true}catch(e){canStore=false;return false}}
+var st;
+try{st=JSON.parse(lsGet(KEY)||"null")}catch(e){st=null}
+if(!st||!Array.isArray(st.steps)) st=JSON.parse(JSON.stringify(DEF));
+var checked={};
+function save(){
+  var ok=lsSet(KEY,JSON.stringify(st));
+  var el=$("saveState");
+  el.textContent=ok?"이 기기에 자동 저장됨":"저장 불가 — 새로고침 시 초기화";
+  el.className="save-state"+(ok?"":" bad");
+}
+
+/* ---------- helpers ---------- */
+function $(id){return document.getElementById(id)}
+function num(s){ if(s===null||s===undefined) return null; s=String(s).trim().replace(",","."); if(s==="") return null;
+  var v=Number(s); return isFinite(v)?v:NaN; }
+function clean(x){return Number(Number(x).toPrecision(12))}
+function roundTo(x,u){ return clean(Math.round(clean(x/u))*u); }
+function decOf(u){ var s=String(u); var i=s.indexOf("."); return i<0?0:Math.min(4,s.length-i-1); }
+function fmtN(x,maxd){ if(x===null||x===undefined||isNaN(x)) return "–"; var d=maxd===undefined?2:maxd;
+  return String(clean(Number(x.toFixed(d)))); }
+function fmtHM(min){ if(min===null||min===undefined||isNaN(min)) return "–";
+  var neg=min<0; min=Math.abs(min);
+  var totalSec=Math.round(min*60);
+  var h=Math.floor(totalSec/3600), m=Math.floor((totalSec%3600)/60), s=totalSec%60;
+  var out=h+":"+(m<10?"0":"")+m + (s?":"+(s<10?"0":"")+s:"");
+  return (neg?"-":"")+out; }
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+/* ---------- core calc (엑셀 '계산기' 시트와 동일 로직) ---------- */
+function compute(){
+  var start=num(st.start), unit=num(st.unit), maxSeg=num(st.maxSeg);
+  var R={rows:[],segs:[],errors:[],valid:0,total:null};
+  if(start===null||isNaN(start)) R.errors.push("시작 온도를 입력하세요");
+  var unitOk=(unit!==null&&!isNaN(unit)&&unit>0);
+  if(!unitOk) R.errors.push("시간 반올림 단위는 0보다 커야 합니다");
+  var prevT=(start===null||isNaN(start))?0:start, cum=0, broken=false;
+  st.steps.forEach(function(s,i){
+    var T=num(s.t), r=num(s.r), h=num(s.h);
+    var row={i:i,T:T,warn:[],err:[],ok:false};
+    if(broken){ row.err.push("앞 단계가 비어 있음 — 계산 무효"); R.rows.push(row); return; }
+    if(T===null||isNaN(T)){ row.err.push("목표 온도 미입력 — 입력하거나 단계 삭제"); broken=true; R.rows.push(row); return; }
+    if(T<-50||T>3000) row.warn.push("온도 범위 확인 (-50~3000 °C)");
+    var hold=(h===null||isNaN(h))?0:h;
+    if(h!==null&&!isNaN(h)&&h<0) row.err.push("유지 시간은 0 이상");
+    if(h!==null&&isNaN(h)) row.err.push("유지 시간 숫자 확인");
+    if(r!==null&&isNaN(r)) row.err.push("속도 숫자 확인");
+    var E=prevT, F=clean(T-E);
+    var kind=F>0?"승온":(F<0?"냉각":"유지만");
+    var rv=(r===null||isNaN(r))?0:r;
+    var H=(F===0)?0:(rv>0?Math.abs(F)/rv:null);
+    var I=(H===null||!unitOk)?null:roundTo(H,unit);
+    var J=(I===null||F===0||I===0)?null:Math.abs(F)/I;
+    cum=clean(cum+(I||0)+hold);
+    if(F!==0&&!(rv>0)) row.err.push("속도 미입력");
+    else if(F!==0&&I===0) row.err.push("반올림 결과 0분 — 단위 확인");
+    else if(J!==null&&rv>0&&Math.abs(J-rv)/rv>0.05) row.warn.push("반올림 후 실제 속도 5% 이상 차이 ("+fmtN(J,3)+" °C/min)");
+    row.ok=true; row.E=E; row.F=F; row.kind=kind; row.H=H; row.I=I; row.J=J; row.hold=hold; row.K=cum; row.r=rv;
+    R.rows.push(row); R.valid++; prevT=T;
+  });
+  var vr=R.rows.filter(function(x){return x.ok});
+  R.total=vr.length?vr[vr.length-1].K:null;
+  // 장입표: 단계당 승/하온 1 + 유지 1
+  vr.forEach(function(x,k){
+    var svRamp=(st.mode==="B")?(k===0?start:vr[k-1].T):x.T;
+    R.segs.push({sv:svRamp,time:x.I,desc:fmtN(x.E)+" → "+fmtN(x.T)+" °C "+x.kind,kind:x.kind,step:x.i});
+    R.segs.push({sv:x.T,time:x.hold,desc:fmtN(x.T)+" °C 유지",kind:"유지",step:x.i});
+  });
+  R.segCount=R.segs.length;
+  R.segNZ=R.segs.filter(function(s){return s.time!==null&&s.time>0}).length;
+  R.maxSeg=(maxSeg===null||isNaN(maxSeg))?null:maxSeg;
+  R.segStatus=null;
+  if(R.maxSeg!==null&&R.segCount){
+    if(R.segNZ>R.maxSeg) R.segStatus="ng";
+    else if(R.segCount>R.maxSeg) R.segStatus="wn";
+    else R.segStatus="ok";
+  }
+  R.unit=unitOk?unit:1;
+  return R;
+}
+
+/* ---------- render: settings ---------- */
+function syncSettings(){
+  $("cStart").value=st.start; $("cUnit").value=st.unit; $("cMax").value=st.maxSeg; $("cTime").value=st.startTime||"";
+  Array.prototype.forEach.call($("unitSeg").children,function(b){b.classList.toggle("on",String(num(st.unit))===b.dataset.u)});
+  Array.prototype.forEach.call($("modeSeg").children,function(b){b.classList.toggle("on",st.mode===b.dataset.m)});
+  $("modeHint").textContent=st.mode==="A"
+    ?"A: 시간 n = SV n까지 가는 시간 (SSV 시작 온도 설정 방식)"
+    :"B: 시간 n = SV n에서 다음 SV까지 가는 시간 (첫 SV = 시작 온도)";
+  $("oHide").checked=!!st.hideZero; $("oHM").checked=!!st.showHM;
+}
+
+/* ---------- render: step cards (구조) ---------- */
+function buildSteps(){
+  var box=$("steps"); box.innerHTML="";
+  st.steps.forEach(function(s,i){
+    var c=document.createElement("div"); c.className="card step"; c.dataset.i=i;
+    c.innerHTML=
+      '<div class="step-head"><span class="step-no">Step '+(i+1)+'</span><span class="badge" data-r="badge"></span><span class="sp"></span>'+
+      '<button class="ibtn" data-a="up" type="button" aria-label="위로"'+(i===0?" disabled":"")+'>↑</button>'+
+      '<button class="ibtn" data-a="down" type="button" aria-label="아래로"'+(i===st.steps.length-1?" disabled":"")+'>↓</button>'+
+      '<button class="ibtn del" data-a="del" type="button" aria-label="삭제">✕</button></div>'+
+      '<div class="grid3">'+
+        '<label class="f"><span>목표 온도</span><div class="unit-in"><input type="text" inputmode="decimal" data-k="t" value="'+esc(s.t)+'"><em>°C</em></div></label>'+
+        '<label class="f"><span>속도</span><div class="unit-in"><input type="text" inputmode="decimal" data-k="r" value="'+esc(s.r)+'"><em style="font-size:10px">°C/m</em></div></label>'+
+        '<label class="f"><span>유지</span><div class="unit-in"><input type="text" inputmode="decimal" data-k="h" value="'+esc(s.h)+'"><em>min</em></div></label>'+
+      '</div>'+
+      '<div class="res num" data-r="res"></div><div data-r="msg"></div>';
+    box.appendChild(c);
+  });
+  $("addStep").disabled=st.steps.length>=MAXSTEP;
+  $("addStep").textContent=st.steps.length>=MAXSTEP?"최대 "+MAXSTEP+"단계":"+ 단계 추가";
+}
+
+/* ---------- render: 결과 갱신 ---------- */
+function update(){
+  var R=compute();
+  // step results
+  Array.prototype.forEach.call($("steps").children,function(c){
+    var i=+c.dataset.i, row=R.rows[i]; if(!row) return;
+    var badge=c.querySelector('[data-r="badge"]'), res=c.querySelector('[data-r="res"]'), msg=c.querySelector('[data-r="msg"]');
+    var kc=row.ok?(row.kind==="승온"?"k-up":row.kind==="냉각"?"k-down":""):"";
+    c.className="card step "+kc; badge.className="badge "+kc; badge.textContent=row.ok?row.kind:"—";
+    if(row.ok){
+      res.innerHTML=
+        '<span class="full"><span class="k">구간</span> <b>'+fmtN(row.E)+' → '+fmtN(row.T)+' °C</b> <span class="k">(ΔT '+(row.F>0?"+":"")+fmtN(row.F)+')</span></span>'+
+        '<span><span class="k">장입 시간</span> <b>'+(row.I===null?"–":fmtN(row.I,4)+" min")+'</b></span>'+
+        '<span><span class="k">계산값</span> '+(row.H===null?"–":fmtN(row.H,3))+'</span>'+
+        '<span><span class="k">실제 속도</span> '+(row.J===null?"–":fmtN(row.J,3))+'</span>'+
+        '<span><span class="k">누적 종료</span> <b>'+fmtHM(row.K)+'</b></span>';
+    } else res.innerHTML='<span class="full k">계산 안 됨</span>';
+    var m="";
+    row.err.forEach(function(t){m+='<div class="wmsg err">'+esc(t)+'</div>'});
+    row.warn.forEach(function(t){m+='<div class="wmsg">'+esc(t)+'</div>'});
+    msg.innerHTML=m;
+    c.querySelectorAll("input").forEach(function(inp){
+      var v=num(inp.value); inp.classList.toggle("bad", inp.value.trim()!==""&&isNaN(v));
+    });
+  });
+  // banner
+  var nErr=R.rows.filter(function(r){return r.err.length}).length;
+  var bn="";
+  R.errors.forEach(function(t){bn+='<div class="banner err">'+esc(t)+'</div>'});
+  if(nErr) bn+='<div class="banner err">확인이 필요한 단계 '+nErr+'개 — 해당 단계의 빨간 메시지 참고</div>';
+  $("banner").innerHTML=bn;
+  $("cStart").classList.toggle("bad",num(st.start)===null||isNaN(num(st.start)));
+  $("cUnit").classList.toggle("bad",!(num(st.unit)>0));
+  // summary
+  $("sTotal").textContent=R.total===null?"–":fmtHM(R.total);
+  $("sTotalMin").textContent=R.total===null?"":fmtN(R.total,2)+" min";
+  var t=st.startTime, endTxt="–", dayTxt="";
+  if(t&&R.total!==null){
+    var p=t.split(":"), sm=(+p[0])*60+(+p[1]);
+    var e=sm+R.total, days=Math.floor(e/1440), em=e-days*1440;
+    var sec=Math.round(em*60); if(sec>=86400){sec-=86400;days++}
+    var hh=Math.floor(sec/3600), mm=Math.floor(sec%3600/60), ss=sec%60;
+    endTxt=(hh<10?"0":"")+hh+":"+(mm<10?"0":"")+mm+(ss?":"+(ss<10?"0":"")+ss:"");
+    dayTxt=days===0?"당일":(days===1?"익일":"+"+days+"일");
+  } else if(!t) dayTxt="시작 시각 없음";
+  $("sEnd").textContent=endTxt; $("sEndDay").textContent=dayTxt;
+  $("sSeg").textContent=R.segCount?R.segCount:"–";
+  var box=$("sSegBox"); box.className="";
+  var sm2="";
+  if(R.segCount) sm2="0분 제외 "+R.segNZ;
+  if(R.segStatus==="ng"){box.className="ng"; sm2="최대 "+R.maxSeg+" 초과"}
+  else if(R.segStatus==="wn"){box.className="wn"; sm2="0분 빼야 "+R.maxSeg+" 이내"}
+  else if(R.segStatus==="ok"){box.className="ok"; sm2="OK (≤"+R.maxSeg+")"}
+  $("sSegMsg").textContent=sm2;
+  drawChart(R); drawTable(R);
+  return R;
+}
+
+/* ---------- chart ---------- */
+function drawChart(R){
+  var svg=$("chart"), W=340,Hh=170, L=40,Rt=10,T=10,B=24;
+  var start=num(st.start); if(start===null||isNaN(start)) start=0;
+  var pts=[[0,start]], tcur=0, ok=true;
+  R.rows.forEach(function(r){ if(!r.ok) return; if(r.I===null){ok=false;return}
+    tcur+=r.I; pts.push([tcur,r.T]); if(r.hold>0){tcur+=r.hold; pts.push([tcur,r.T]);} });
+  if(pts.length<2){svg.innerHTML='<text x="170" y="90" text-anchor="middle" font-size="12" fill="#5B6875">입력값이 없습니다</text>';return}
+  var tmax=Math.max(1,pts[pts.length-1][0]);
+  var ys=pts.map(function(p){return p[1]}), ymin=Math.min(0,Math.min.apply(null,ys)), ymax=Math.max.apply(null,ys);
+  var step=ymax>1000?500:(ymax>400?200:100); ymax=Math.ceil((ymax||1)/step)*step; if(ymax<=ymin) ymax=ymin+step;
+  function X(t){return L+(W-L-Rt)*t/tmax} function Y(v){return T+(Hh-T-B)*(1-(v-ymin)/(ymax-ymin))}
+  var g="";
+  for(var v=ymin; v<=ymax+1e-9; v+=step){ g+='<line x1="'+L+'" x2="'+(W-Rt)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#E6EAEE"/><text x="'+(L-5)+'" y="'+(Y(v)+4)+'" text-anchor="end" font-size="10" fill="#5B6875">'+v+'</text>'; }
+  var hstep=tmax/60>16?240:(tmax/60>8?120:60); if(tmax<120) hstep=30;
+  for(var tt=0; tt<=tmax+1e-9; tt+=hstep){ g+='<text x="'+X(tt)+'" y="'+(Hh-8)+'" text-anchor="middle" font-size="10" fill="#5B6875">'+(hstep<60?fmtHM(tt):(tt/60)+"h")+'</text>'; }
+  var d=pts.map(function(p,i){return (i?"L":"M")+X(p[0]).toFixed(1)+" "+Y(p[1]).toFixed(1)}).join(" ");
+  g+='<path d="'+d+'" fill="none" stroke="#0E6E6B" stroke-width="2.4" stroke-linejoin="round"/>';
+  pts.forEach(function(p){g+='<circle cx="'+X(p[0]).toFixed(1)+'" cy="'+Y(p[1]).toFixed(1)+'" r="2.6" fill="#0E6E6B"/>'});
+  if(!ok) g+='<text x="'+(W-Rt)+'" y="'+(T+10)+'" text-anchor="end" font-size="10" fill="#B3261E">속도 미입력 구간 이후 생략</text>';
+  svg.innerHTML=g;
+}
+
+/* ---------- 장입표 ---------- */
+var lastSegs=[];
+function drawTable(R){
+  $("modeLine").textContent="현재 방식: "+st.mode+(st.mode==="A"?"  (시간 = 해당 SV까지 도달 시간)":"  (시간 = 해당 SV에서 다음 SV까지 시간)");
+  var segs=R.segs.map(function(s,i){var o=Object.assign({},s); o.orig=i+1; return o;});
+  if(st.hideZero) segs=segs.filter(function(s){return !(s.time===0)});
+  segs.forEach(function(s,i){s.no=i+1});
+  lastSegs=segs;
+  var dec=decOf(R.unit), h="";
+  if(!segs.length){$("ptBody").innerHTML='<tr><td colspan="4" class="empty" style="padding:14px 6px">단계를 입력하면 장입표가 만들어집니다</td></tr>';return}
+  segs.forEach(function(s){
+    var key=st.mode+"|"+s.orig+"|"+s.sv+"|"+s.time;
+    var done=!!checked[key];
+    var tMain, tSub;
+    if(s.time===null){tMain="–"; tSub="속도 미입력"}
+    else if(st.showHM){tMain=fmtHM(s.time); tSub=fmtN(s.time,Math.max(dec,0)+2)+" min"}
+    else {tMain=fmtN(s.time,dec+2); tSub=fmtHM(s.time)+" (h:mm)"}
+    var note=(s.time===0)?' <span class="note">0분 — 생략 가능</span>':'';
+    h+='<tr class="'+(done?"done ":"")+(s.time===0?"zero":"")+'" data-key="'+esc(key)+'">'+
+      '<td class="segno num">'+s.no+'</td>'+
+      '<td><div class="sv num">'+fmtN(s.sv)+'</div><div class="desc">'+esc(s.desc)+note+'</div></td>'+
+      '<td class="t num">'+tMain+'<small>'+tSub+'</small></td>'+
+      '<td class="ck"><span class="ckb'+(done?" on":"")+'">'+(done?"✓":"")+'</span></td></tr>';
+  });
+  $("ptBody").innerHTML=h;
+}
+
+/* ---------- events ---------- */
+function onSettingInput(id,key){ $(id).addEventListener("input",function(){st[key]=this.value; save(); syncSegOnly(); update();}); }
+function syncSegOnly(){
+  Array.prototype.forEach.call($("unitSeg").children,function(b){b.classList.toggle("on",String(num(st.unit))===b.dataset.u)});
+}
+onSettingInput("cStart","start"); onSettingInput("cUnit","unit"); onSettingInput("cMax","maxSeg");
+$("cTime").addEventListener("input",function(){st.startTime=this.value; save(); update();});
+$("cTime").addEventListener("change",function(){st.startTime=this.value; save(); update();});
+$("unitSeg").addEventListener("click",function(e){var b=e.target.closest("button"); if(!b) return; st.unit=b.dataset.u; save(); syncSettings(); update();});
+$("modeSeg").addEventListener("click",function(e){var b=e.target.closest("button"); if(!b) return; st.mode=b.dataset.m; save(); syncSettings(); update();});
+
+$("steps").addEventListener("input",function(e){
+  var inp=e.target; if(!inp.dataset.k) return;
+  var i=+inp.closest(".step").dataset.i; st.steps[i][inp.dataset.k]=inp.value; save(); update();
+});
+$("steps").addEventListener("click",function(e){
+  var b=e.target.closest("button[data-a]"); if(!b) return;
+  var i=+b.closest(".step").dataset.i, a=b.dataset.a;
+  if(a==="del"){
+    if(st.steps.length===1){ st.steps[0]={t:"",r:"",h:"0"}; }
+    else st.steps.splice(i,1);
+  } else if(a==="up"&&i>0){ var x=st.steps[i]; st.steps[i]=st.steps[i-1]; st.steps[i-1]=x; }
+  else if(a==="down"&&i<st.steps.length-1){ var y=st.steps[i]; st.steps[i]=st.steps[i+1]; st.steps[i+1]=y; }
+  save(); buildSteps(); update();
+});
+$("addStep").addEventListener("click",function(){
+  if(st.steps.length>=MAXSTEP) return;
+  var last=st.steps[st.steps.length-1];
+  st.steps.push({t:"",r:last?last.r:"",h:"0"});
+  save(); buildSteps(); update();
+  var cards=$("steps").children, c=cards[cards.length-1];
+  c.scrollIntoView({behavior:"smooth",block:"center"});
+  setTimeout(function(){var f=c.querySelector('input[data-k="t"]'); if(f) f.focus();},250);
+});
+
+function showTab(out){
+  $("tabIn").classList.toggle("on",!out); $("tabOut").classList.toggle("on",out);
+  $("pIn").classList.toggle("hidden",out); $("pOut").classList.toggle("hidden",!out);
+  window.scrollTo(0,0);
+}
+$("tabIn").addEventListener("click",function(){showTab(false)});
+$("tabOut").addEventListener("click",function(){showTab(true)});
+$("oHide").addEventListener("change",function(){st.hideZero=this.checked; save(); update();});
+$("oHM").addEventListener("change",function(){st.showHM=this.checked; save(); update();});
+$("ptBody").addEventListener("click",function(e){
+  var tr=e.target.closest("tr[data-key]"); if(!tr) return;
+  var k=tr.dataset.key; checked[k]=!checked[k]; update();
+});
+$("ckReset").addEventListener("click",function(){checked={}; update();});
+$("copyTbl").addEventListener("click",function(){
+  var lines=["Seg\tSV (°C)\t시간 (min)\t시간 (h:mm)\t내용"];
+  lastSegs.forEach(function(s){lines.push(s.no+"\t"+fmtN(s.sv)+"\t"+(s.time===null?"":fmtN(s.time,4))+"\t"+(s.time===null?"":fmtHM(s.time))+"\t"+s.desc)});
+  var txt=lines.join("\n");
+  function done(){toast("장입표를 복사했습니다")}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,fallback)} else fallback();
+  function fallback(){var ta=document.createElement("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select();
+    try{document.execCommand("copy"); done()}catch(e){toast("복사 실패")} document.body.removeChild(ta);}
+});
+
+/* ---------- presets ---------- */
+function getPresets(){try{return JSON.parse(lsGet(PKEY)||"[]")}catch(e){return []}}
+function setPresets(p){lsSet(PKEY,JSON.stringify(p))}
+function snapshot(){return {start:st.start,unit:st.unit,mode:st.mode,maxSeg:st.maxSeg,steps:JSON.parse(JSON.stringify(st.steps))}}
+function presetSummary(p){
+  var s=p.steps.filter(function(x){return String(x.t).trim()!==""}).map(function(x){return x.t+(num(x.h)>0?"("+x.h+"′)":"")});
+  return p.mode+" · "+p.start+"→"+s.join("→")+" °C";
+}
+function drawPresets(){
+  var p=getPresets(), h="";
+  if(!p.length) h='<div class="empty">저장된 프로그램이 없습니다. 자주 쓰는 프로파일에 이름을 붙여 저장하세요.</div>';
+  p.forEach(function(x,i){
+    h+='<div class="preset"><div class="nm">'+esc(x.name)+'<small>'+esc(presetSummary(x.data))+'</small></div>'+
+      '<button class="btn sm" data-pa="load" data-pi="'+i+'" type="button">불러오기</button>'+
+      '<button class="btn sm" data-pa="del" data-pi="'+i+'" type="button" style="color:#B3261E">삭제</button></div>';
+  });
+  $("pList").innerHTML=h;
+}
+$("pSave").addEventListener("click",function(){
+  var n=$("pName").value.trim(); if(!n){toast("이름을 입력하세요"); $("pName").focus(); return}
+  var p=getPresets(), idx=-1; p.forEach(function(x,i){if(x.name===n) idx=i});
+  if(idx>=0){ p[idx].data=snapshot(); }
+  else p.unshift({name:n,data:snapshot()});
+  setPresets(p); $("pName").value=""; drawPresets(); toast(idx>=0?"같은 이름에 덮어썼습니다":"저장했습니다");
+});
+$("pList").addEventListener("click",function(e){
+  var b=e.target.closest("button[data-pa]"); if(!b) return;
+  var p=getPresets(), i=+b.dataset.pi; if(!p[i]) return;
+  if(b.dataset.pa==="load"){
+    var d=p[i].data; st.start=d.start; st.unit=d.unit; st.mode=d.mode; st.maxSeg=d.maxSeg; st.steps=JSON.parse(JSON.stringify(d.steps));
+    checked={}; save(); syncSettings(); buildSteps(); update(); toast("'"+p[i].name+"' 불러옴"); window.scrollTo({top:0,behavior:"smooth"});
+  } else {
+    if(b.dataset.armed!=="1"){ b.dataset.armed="1"; b.textContent="확인"; setTimeout(function(){b.dataset.armed="";b.textContent="삭제"},2500); return; }
+    p.splice(i,1); setPresets(p); drawPresets(); toast("삭제했습니다");
+  }
+});
+
+var tt;
+function toast(m){var t=$("toast"); t.textContent=m; t.classList.add("on"); clearTimeout(tt); tt=setTimeout(function(){t.classList.remove("on")},1600)}
+
+/* ---------- init ---------- */
+syncSettings(); buildSteps(); save(); update(); drawPresets();
+window.__furnace={compute:compute,st:function(){return st}};
+})();
+</script>
+</body>
+</html>
